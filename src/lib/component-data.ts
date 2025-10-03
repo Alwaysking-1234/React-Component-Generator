@@ -12,6 +12,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       dependencies: [],
       props: [
         {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for styling (colors, borders, radius, etc.)'
+        },
+        {
           name: 'variant',
           type: 'enum',
           defaultValue: 'default',
@@ -56,6 +62,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       dependencies: [],
       props: [
         {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for styling (colors, borders, spacing)'
+        },
+        {
           name: 'variant',
           type: 'enum',
           defaultValue: 'default',
@@ -82,6 +94,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       importPath: '@/components/ui/dialog',
       dependencies: [],
       props: [
+        {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes applied to DialogContent'
+        },
         {
           name: 'open',
           type: 'boolean',
@@ -110,7 +128,14 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       category: 'data',
       importPath: '@/components/ui/table',
       dependencies: [],
-      props: [],
+      props: [
+        {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for styling the table'
+        }
+      ],
       variants: [
         { name: 'Default', props: {} }
       ],
@@ -149,17 +174,17 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
           options: ['single', 'multiple']
         },
         {
-          name: 'collapsible',
-          type: 'boolean',
-          defaultValue: true,
-          description: 'Whether the accordion items can be collapsed'
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for styling'
         }
       ],
       variants: [
         { name: 'Single', props: { type: 'single' } },
         { name: 'Multiple', props: { type: 'multiple' } }
       ],
-      demoCode: `<Accordion type="single" collapsible>
+      demoCode: `<Accordion type="single">
   <AccordionItem value="item-1">
     <AccordionTrigger>Is it accessible?</AccordionTrigger>
     <AccordionContent>
@@ -176,6 +201,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       importPath: '@/components/ui/checkbox',
       dependencies: [],
       props: [
+        {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for styling'
+        },
         {
           name: 'checked',
           type: 'boolean',
@@ -204,6 +235,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       importPath: '@/components/ui/radio-group',
       dependencies: [],
       props: [
+        {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for styling'
+        },
         {
           name: 'defaultValue',
           type: 'string',
@@ -344,6 +381,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       dependencies: [],
       props: [
         {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for styling'
+        },
+        {
           name: 'variant',
           type: 'enum',
           defaultValue: 'default',
@@ -374,6 +417,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       dependencies: [],
       props: [
         {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for styling'
+        },
+        {
           name: 'checked',
           type: 'boolean',
           defaultValue: false,
@@ -401,6 +450,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       importPath: '@/components/ui/textarea',
       dependencies: [],
       props: [
+        {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for styling'
+        },
         {
           name: 'placeholder',
           type: 'string',
@@ -434,6 +489,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       importPath: '@/components/ui/select',
       dependencies: [],
       props: [
+        {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes applied to SelectTrigger'
+        },
         {
           name: 'placeholder',
           type: 'string',
@@ -471,6 +532,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       dependencies: [],
       props: [
         {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for styling the root'
+        },
+        {
           name: 'defaultValue',
           type: 'string',
           defaultValue: 'tab1',
@@ -505,6 +572,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       importPath: '@/components/ui/separator',
       dependencies: [],
       props: [
+        {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes for color, thickness, spacing'
+        },
         {
           name: 'orientation',
           type: 'enum',
@@ -549,6 +622,12 @@ export const getAvailableComponents = async (): Promise<ShadcnComponent[]> => {
       importPath: '@/components/ui/resizable',
       dependencies: [],
       props: [
+        {
+          name: 'className',
+          type: 'string',
+          defaultValue: '',
+          description: 'Additional CSS classes applied to the panel group'
+        },
         {
           name: 'defaultSize',
           type: 'number',

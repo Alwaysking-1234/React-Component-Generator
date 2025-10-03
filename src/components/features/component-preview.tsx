@@ -161,9 +161,9 @@ export function ComponentPreview() {
       switch (name) {
         case 'accordion': {
           const type = (validProps.type as string) ?? 'single';
-          const collapsible = (validProps.collapsible as boolean) ?? true;
+          // Avoid passing `collapsible` to DOM to prevent React warning; Radix handles it when type="single"
           return (
-            <Accordion type={type as 'single' | 'multiple'} collapsible={collapsible} className="w-full max-w-md">
+            <Accordion type={type as 'single' | 'multiple'} className={(validProps.className as string) ?? 'w-full max-w-md'}>
               <AccordionItem value="item-1">
                 <AccordionTrigger>Is it accessible?</AccordionTrigger>
                 <AccordionContent>
@@ -196,7 +196,7 @@ export function ComponentPreview() {
         }
         case 'table': {
           return (
-            <Table className="w-full max-w-2xl">
+            <Table className={(validProps.className as string) ?? 'w-full max-w-2xl'}>
               <TableHeader>
                 <TableRow>
                   <TableHead>Invoice</TableHead>
@@ -225,7 +225,7 @@ export function ComponentPreview() {
         case 'radio-group': {
           const defaultValue = (validProps.defaultValue as string) ?? 'option-one';
           return (
-            <RadioGroup defaultValue={defaultValue} className="space-y-2">
+            <RadioGroup defaultValue={defaultValue} className={(validProps.className as string) ?? 'space-y-2'}>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="option-one" id="option-one" />
                 <Label htmlFor="option-one">Option One</Label>
@@ -242,7 +242,7 @@ export function ComponentPreview() {
           const disabled = (validProps.disabled as boolean) ?? false;
           return (
             <Select disabled={disabled}>
-              <SelectTrigger className="w-[240px]">
+              <SelectTrigger className={(validProps.className as string) ?? 'w-[240px]'}>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
               <SelectContent>
@@ -256,7 +256,7 @@ export function ComponentPreview() {
         case 'tabs': {
           const defaultValue = (validProps.defaultValue as string) ?? 'tab1';
           return (
-            <Tabs defaultValue={defaultValue} className="w-[400px]">
+            <Tabs defaultValue={defaultValue} className={(validProps.className as string) ?? 'w-[400px]'}>
               <TabsList>
                 <TabsTrigger value="tab1">Tab 1</TabsTrigger>
                 <TabsTrigger value="tab2">Tab 2</TabsTrigger>
@@ -279,7 +279,7 @@ export function ComponentPreview() {
           return (
             <div className="w-full max-w-md">
               <p className="mb-2">Section A</p>
-              <Separator orientation={orientation as 'horizontal' | 'vertical'} />
+              <Separator orientation={orientation as 'horizontal' | 'vertical'} className={(validProps.className as string) ?? ''} />
               <p className="mt-2">Section B</p>
             </div>
           );
@@ -295,7 +295,7 @@ export function ComponentPreview() {
         case 'resizable': {
           const leftSize = (validProps.defaultSize as number) ?? 50;
           return (
-            <ResizablePanelGroup direction="horizontal" className="w-[500px]">
+            <ResizablePanelGroup direction="horizontal" className={(validProps.className as string) ?? 'w-[500px]'}>
               <ResizablePanel defaultSize={leftSize}>
                 <div className="flex h-[200px] items-center justify-center p-6">
                   <span className="font-semibold">Panel 1</span>
@@ -326,7 +326,7 @@ export function ComponentPreview() {
         case 'alert': {
           const variant = (validProps.variant as string) ?? 'default';
           return (
-            <Alert variant={variant as 'default' | 'destructive'} className="w-full max-w-md">
+            <Alert variant={variant as 'default' | 'destructive'} className={(validProps.className as string) ?? 'w-full max-w-md'}>
               <AlertTitle>Heads up!</AlertTitle>
               <AlertDescription>
                 You can add components to your app using the cli.
@@ -337,29 +337,29 @@ export function ComponentPreview() {
         case 'checkbox': {
           const checked = (validProps.checked as boolean) ?? false;
           const disabled = (validProps.disabled as boolean) ?? false;
-          return <Checkbox checked={checked} disabled={disabled} />;
+          return <Checkbox checked={checked} disabled={disabled} className={(validProps.className as string) ?? ''} />;
         }
         case 'switch': {
           const checked = (validProps.checked as boolean) ?? false;
           const disabled = (validProps.disabled as boolean) ?? false;
-          return <Switch checked={checked} disabled={disabled} />;
+          return <Switch checked={checked} disabled={disabled} className={(validProps.className as string) ?? ''} />;
         }
         case 'textarea': {
           const placeholder = (validProps.placeholder as string) ?? 'Enter your message...';
           const disabled = (validProps.disabled as boolean) ?? false;
           const rows = (validProps.rows as number) ?? 4;
-          return <Textarea placeholder={placeholder} disabled={disabled} rows={rows} className="w-[350px]" />;
+          return <Textarea placeholder={placeholder} disabled={disabled} rows={rows} className={(validProps.className as string) ?? 'w-[350px]'} />;
         }
         case 'input': {
           const type = (validProps.type as string) ?? 'text';
           const placeholder = (validProps.placeholder as string) ?? 'Enter text...';
           const disabled = (validProps.disabled as boolean) ?? false;
-          return <Input type={type} placeholder={placeholder} disabled={disabled} className="w-[280px]" />;
+          return <Input type={type} placeholder={placeholder} disabled={disabled} className={(validProps.className as string) ?? 'w-[280px]'} />;
         }
         case 'badge': {
           const variant = (validProps.variant as string) ?? 'default';
           const children = (validProps.children as string) ?? 'Badge';
-          return <BadgeComponent variant={variant as 'default' | 'secondary' | 'destructive' | 'outline'}>{children}</BadgeComponent>;
+          return <BadgeComponent variant={variant as 'default' | 'secondary' | 'destructive' | 'outline'} className={(validProps.className as string) ?? ''}>{children}</BadgeComponent>;
         }
         case 'button': {
           const variant = (validProps.variant as string) ?? 'default';
@@ -371,6 +371,7 @@ export function ComponentPreview() {
               variant={variant as import('class-variance-authority').VariantProps<typeof buttonVariants>['variant']} 
               size={size as import('class-variance-authority').VariantProps<typeof buttonVariants>['size']} 
               disabled={disabled}
+              className={(validProps.className as string) ?? ''}
             >
               {children}
             </Button>
