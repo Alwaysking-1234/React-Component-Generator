@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shadcn Component Customizer
+
+A powerful web application that allows you to select components from the Shadcn UI library, customize their properties in real-time, and export the generated code.
+
+## Features
+
+- **Component Selection**: Browse and select from various Shadcn UI components
+- **Live Preview**: See your customized component in real-time
+- **Property Customization**: Adjust component properties with intuitive controls
+- **Code Generation**: Generate clean, production-ready React code
+- **Export Options**: Copy code to clipboard or download as TypeScript files
+- **Syntax Highlighting**: Beautiful code display with syntax highlighting
+- **Responsive Design**: Works seamlessly across different screen sizes
+- **Split-Pane Interface**: Efficient workspace with resizable panels
+
+## Tech Stack
+
+- **Frontend**: Next.js 14+ with App Router
+- **Language**: TypeScript 5+ with strict mode
+- **UI Framework**: shadcn/ui + Tailwind CSS
+- **State Management**: Zustand
+- **Code Highlighting**: react-syntax-highlighter
+- **Icons**: lucide-react
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd shadcn-component-customizer
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+1. **Select a Component**: Choose from the available Shadcn UI components in the left panel
+2. **Customize Properties**: Use the property controls in the right panel to adjust the component
+3. **Preview Changes**: See your customized component in the center panel
+4. **Export Code**: Switch to the Export tab to copy or download the generated code
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
+├── components/
+│   ├── ui/                # shadcn/ui components
+│   ├── features/          # Feature components
+│   │   ├── component-selector.tsx
+│   │   ├── component-preview.tsx
+│   │   ├── property-customizer.tsx
+│   │   └── action-buttons.tsx
+│   └── layouts/           # Layout components
+│       └── app-layout.tsx
+├── lib/
+│   ├── component-data.ts  # Component data and utilities
+│   └── code-generator.ts  # Code generation utilities
+├── stores/
+│   └── component-store.ts # Zustand state management
+└── types/
+    └── component.ts       # TypeScript type definitions
+```
 
-## Deploy on Vercel
+## Available Components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application currently supports the following Shadcn UI components:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Button
+- Input
+- Badge
+- Card
+- And more can be easily added...
+
+## Customization Features
+
+### Property Types Supported
+- **String**: Text inputs for properties like labels, placeholders
+- **Number**: Numeric inputs for sizing and spacing
+- **Boolean**: Switch toggles for true/false properties
+- **Enum**: Select dropdowns for predefined options
+
+### Quick Variants
+Pre-configured component variants for common use cases
+
+### Real-time Preview
+See changes instantly as you modify properties
+
+## Code Generation
+
+The application generates:
+- Complete TypeScript React components
+- Proper import statements
+- Type-safe prop definitions
+- Clean, formatted code
+
+## Development
+
+### Adding New Components
+
+1. Add component data to `src/lib/component-data.ts`
+2. Update the component map in `src/components/features/component-preview.tsx`
+3. Add the component to the component selector
+
+### Extending Properties
+
+1. Define new property types in `src/types/component.ts`
+2. Update property controls in `src/components/features/property-customizer.tsx`
+3. Handle new property types in the code generator
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com/) for the amazing UI components
+- [Next.js](https://nextjs.org/) for the React framework
+- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
