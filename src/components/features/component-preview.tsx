@@ -455,6 +455,7 @@ export function ComponentPreview() {
                 <Toaster 
                   position={(customProps.position as import('sonner').ToasterProps['position']) ?? 'bottom-right'}
                   richColors={Boolean(customProps.richColors)}
+                  duration={typeof customProps.duration === 'number' ? customProps.duration : undefined}
                 />
                 <Button onClick={() => toast.success('Hello World!', { duration: typeof customProps.duration === 'number' ? customProps.duration : 4000 })}>
                   Show Toast

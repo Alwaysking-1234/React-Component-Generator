@@ -4,6 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { useEffect, useMemo, useState } from 'react';
 import { useComponentStore } from '@/stores/component-store';
 
@@ -108,7 +111,7 @@ const alignOptions: Option[] = [
 ];
 
 export function StyleControls() {
-  const { selectedComponent, stylePresetClassName, setStylePresetClassName } = useComponentStore();
+  const { selectedComponent, setStylePresetClassName } = useComponentStore();
 
   const [bgColor, setBgColor] = useState<string>('none');
   const [textColor, setTextColor] = useState<string>('auto');
@@ -168,6 +171,23 @@ export function StyleControls() {
     setStylePresetClassName('');
   }, [selectedComponent, setStylePresetClassName]);
 
+  const resetAll = () => {
+    setBgColor('none');
+    setTextColor('auto');
+    setBorderStyle('none');
+    setBorderColor('default');
+    setPadding('none');
+    setMargin('none');
+    setFontSize('text-sm');
+    setFontWeight('font-medium');
+    setRadius('rounded-md');
+    setHoverEffect('none');
+    setShadow('none');
+    setGap('none');
+    setAlign('text-left');
+    setStylePresetClassName('');
+  };
+
   const renderSelect = (id: string, label: string, value: string, onChange: (val: string) => void, options: Option[]) => {
     return (
       <div className="space-y-2">
@@ -193,26 +213,44 @@ export function StyleControls() {
         <CardDescription>Adjust visual attributes in real time</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        {renderSelect('bg-color', 'Background Color', bgColor, setBgColor, colorOptions)}
+        {/* Top actions: Theme override and Reset button */}
+        <div className="flex items-center justify-between gap-4">
+          <ThemeToggle />
+          <Button variant="secondary" onClick={resetAll} aria-label="Reset styles">Reset</Button>
+        </div>
         <Separator className="my-4" />
-        {renderSelect('text-color', 'Text Color', textColor, setTextColor, textColorOptions)}
+
+        {/* Basic tools - prominent section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {renderSelect('bg-color', 'Background Color', bgColor, setBgColor, colorOptions)}
+          {renderSelect('text-color', 'Text Color', textColor, setTextColor, textColorOptions)}
+          {renderSelect('font-size', 'Font Size', fontSize, setFontSize, fontSizeOptions)}
+          {renderSelect('font-weight', 'Font Weight', fontWeight, setFontWeight, fontWeightOptions)}
+          {renderSelect('radius', 'Border Radius', radius, setRadius, radiusOptions)}
+          {renderSelect('padding', 'Padding', padding, setPadding, paddingOptions)}
+          {renderSelect('margin', 'Margin', margin, setMargin, marginOptions)}
+        </div>
+
         <Separator className="my-4" />
-        {renderSelect('border-style', 'Border Style', borderStyle, setBorderStyle, borderStyleOptions)}
-        {renderSelect('border-color', 'Border Color', borderColor, setBorderColor, borderColorOptions)}
-        <Separator className="my-4" />
-        {renderSelect('padding', 'Padding', padding, setPadding, paddingOptions)}
-        {renderSelect('margin', 'Margin', margin, setMargin, marginOptions)}
-        <Separator className="my-4" />
-        {renderSelect('font-size', 'Font Size', fontSize, setFontSize, fontSizeOptions)}
-        {renderSelect('font-weight', 'Font Weight', fontWeight, setFontWeight, fontWeightOptions)}
-        <Separator className="my-4" />
-        {renderSelect('radius', 'Border Radius', radius, setRadius, radiusOptions)}
-        <Separator className="my-4" />
-        {renderSelect('hover', 'Hover Effect', hoverEffect, setHoverEffect, hoverEffectOptions)}
-        {renderSelect('shadow', 'Shadow', shadow, setShadow, shadowOptions)}
-        <Separator className="my-4" />
-        {renderSelect('gap', 'Component Spacing', gap, setGap, gapOptions)}
-        {renderSelect('align', 'Alignment', align, setAlign, alignOptions)}
+
+        {/* Advanced options grouped under Accordion */}
+        <Accordion type="single" collapsible>
+          <AccordionItem value="advanced">
+            <AccordionTrigger>
+              <span className="font-medium">Advanced</span>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {renderSelect('border-style', 'Border Style', borderStyle, setBorderStyle, borderStyleOptions)}
+                {renderSelect('border-color', 'Border Color', borderColor, setBorderColor, borderColorOptions)}
+                {renderSelect('hover', 'Hover Effect', hoverEffect, setHoverEffect, hoverEffectOptions)}
+                {renderSelect('shadow', 'Shadow', shadow, setShadow, shadowOptions)}
+                {renderSelect('gap', 'Component Spacing', gap, setGap, gapOptions)}
+                {renderSelect('align', 'Alignment', align, setAlign, alignOptions)}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </CardContent>
     </Card>
   );

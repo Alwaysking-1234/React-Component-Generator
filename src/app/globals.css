@@ -118,6 +118,19 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Smooth theme transitions while respecting reduced motion */
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+}
+
+/* Global smooth color transitions for common surfaces */
+html, body, .bg-background, .bg-card, .bg-popover {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html, body, .bg-background, .bg-card, .bg-popover {
+    transition: none;
   }
 }
 

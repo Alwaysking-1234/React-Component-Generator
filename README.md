@@ -12,6 +12,7 @@ A powerful web application that allows you to select components from the Shadcn 
 - **Syntax Highlighting**: Beautiful code display with syntax highlighting
 - **Responsive Design**: Works seamlessly across different screen sizes
 - **Split-Pane Interface**: Efficient workspace with resizable panels
+- **Dark Mode**: System-aware theming with manual override (light/dark/system), smooth transitions, and accessible color palettes
 
 ## Tech Stack
 
@@ -56,15 +57,26 @@ npm run dev
 3. **Preview Changes**: See your customized component in the center panel
 4. **Export Code**: Switch to the Export tab to copy or download the generated code
 
+### Dark Mode & Accessibility
+- The app respects your OS preference using system detection and provides a Theme toggle (System/Light/Dark) in the customization panel.
+- Color palettes use OKLCH variables for better perceptual consistency and maintain WCAG AA contrast (≥ 4.5:1 for body text; ≥ 3:1 for large text).
+- Smooth color transitions are enabled and automatically disabled when users prefer reduced motion.
+
+### Customization UI
+- Style Controls now prioritize Reset and basic tools at the top for quick changes.
+- Advanced options (borders, hover effects, shadows, spacing, alignment) are grouped under an Accordion with clear indicators and animations.
+
 ## Project Structure
 
 ```
 src/
 ├── app/                    # Next.js App Router
 │   ├── layout.tsx         # Root layout
+│   ├── providers.tsx      # Client providers (ThemeProvider)
 │   └── page.tsx           # Home page
 ├── components/
 │   ├── ui/                # shadcn/ui components
+│   │   └── theme-toggle.tsx   # Theme manual override selector
 │   ├── features/          # Feature components
 │   │   ├── component-selector.tsx
 │   │   ├── component-preview.tsx
