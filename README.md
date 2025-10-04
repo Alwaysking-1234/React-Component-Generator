@@ -4,7 +4,6 @@
 
 Repository: https://github.com/Mahdirnj/React-Component-Generator
 
-Live Demo (GitHub Pages, if enabled): https://mahdirnj.github.io/React-Component-Generator/
 
 Transform your UI development workflow with live component customization, intelligent theming, and instant code export. Built with Next.js 15, React 19, and modern web technologies.
 
