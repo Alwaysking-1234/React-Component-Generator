@@ -15,7 +15,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export function PropertyCustomizer() {
-  const { selectedComponent, customProps, updateCustomProp, resetCustomProps } = useComponentStore();
+  const { selectedComponent, customProps, stylePresetClassName, updateCustomProp, resetCustomProps } = useComponentStore();
 
   if (!selectedComponent) {
     return (
@@ -129,7 +129,11 @@ export function PropertyCustomizer() {
     }
   };
 
-  const currentCode = generateComponentCode(selectedComponent, customProps);
+  const combinedProps = {
+    ...customProps,
+    className: `${stylePresetClassName ?? ''} ${typeof customProps.className === 'string' ? customProps.className : ''}`.trim()
+  };
+  const currentCode = generateComponentCode(selectedComponent, combinedProps);
 
   return (
     <div className="space-y-4">

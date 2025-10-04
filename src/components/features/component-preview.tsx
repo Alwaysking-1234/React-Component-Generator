@@ -129,7 +129,7 @@ const componentMap: ComponentMap = {
 };
 
 export function ComponentPreview() {
-  const { selectedComponent, customProps } = useComponentStore();
+  const { selectedComponent, customProps, stylePresetClassName } = useComponentStore();
   // customProps now supports string[] for multi-value props
 
   const renderedComponent = useMemo(() => {
@@ -144,7 +144,9 @@ export function ComponentPreview() {
         if (key === 'children' && (typeof value === 'string' || Array.isArray(value))) {
           acc.children = value;
         } else if (key === 'className') {
-          acc.className = value;
+          const preset = stylePresetClassName ?? '';
+          const freeform = (value as string) ?? '';
+          acc.className = `${preset} ${freeform}`.trim();
         } else if (key === 'disabled' || key === 'required' || key === 'checked' || key === 'open' || key === 'collapsible') {
           acc[key] = Boolean(value);
         } else if (key === 'rows' || key === 'defaultSize' || key === 'minSize' || key === 'duration') {
@@ -388,7 +390,7 @@ export function ComponentPreview() {
       console.error('Error rendering component:', error);
       return <div className="text-red-500">Error rendering component</div>;
     }
-  }, [selectedComponent, customProps]);
+  }, [selectedComponent, customProps, stylePresetClassName]);
 
   const generatedCode = useMemo(() => {
     if (!selectedComponent) return '';
@@ -396,9 +398,14 @@ export function ComponentPreview() {
     // Special case for sonner (toast) component
     if (selectedComponent.name === 'sonner') {
       const duration = typeof customProps.duration === 'number' ? customProps.duration : 4000;
-      return `<Button onClick={() => toast.success('Hello World!', { duration: ${duration} })}>
-  Show Toast
-</Button>`;
+      const position = (customProps.position as import('sonner').ToasterProps['position']) ?? 'bottom-right';
+      const richColors = Boolean(customProps.richColors);
+      return `<>
+  <Toaster position="${position}" richColors={${richColors}} />
+  <Button onClick={() => toast.success('Hello World!', { duration: ${duration} })}>
+    Show Toast
+  </Button>
+</>`;
     }
     
     return generateComponentCode(selectedComponent, customProps);
@@ -443,9 +450,16 @@ export function ComponentPreview() {
         <CardContent>
           <div className="border rounded-lg p-8 bg-gray-50 dark:bg-gray-900 min-h-[220px] flex items-start justify-start overflow-auto">
             {selectedComponent?.name === 'sonner' ? (
-              <Button onClick={() => toast.success('Hello World!', { duration: typeof customProps.duration === 'number' ? customProps.duration : 4000 })}>
-                Show Toast
-              </Button>
+              <div className="space-y-4">
+                {/* Local toaster configured from custom properties to scope changes to this preview only */}
+                <Toaster 
+                  position={(customProps.position as import('sonner').ToasterProps['position']) ?? 'bottom-right'}
+                  richColors={Boolean(customProps.richColors)}
+                />
+                <Button onClick={() => toast.success('Hello World!', { duration: typeof customProps.duration === 'number' ? customProps.duration : 4000 })}>
+                  Show Toast
+                </Button>
+              </div>
             ) : (
               renderedComponent
             )}

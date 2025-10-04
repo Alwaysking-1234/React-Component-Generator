@@ -5,7 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Button } from '@/components/ui/button';
 import { Search, Package, AlertCircle } from 'lucide-react';
 import { useComponentStore } from '@/stores/component-store';
 import { getAvailableComponents } from '@/lib/component-data';
@@ -13,19 +12,10 @@ import { ShadcnComponent } from '@/types/component';
 import { useDebounce } from '@/hooks/use-debounce';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
-const CATEGORIES = [
-  { id: 'all', name: 'All Components', color: 'bg-blue-500' },
-  { id: 'ui', name: 'UI Components', color: 'bg-green-500' },
-  { id: 'form', name: 'Form Components', color: 'bg-purple-500' },
-  { id: 'layout', name: 'Layout Components', color: 'bg-orange-500' },
-  { id: 'feedback', name: 'Feedback', color: 'bg-red-500' },
-  { id: 'navigation', name: 'Navigation', color: 'bg-indigo-500' },
-  { id: 'data-display', name: 'Data Display', color: 'bg-pink-500' },
-  { id: 'overlay', name: 'Overlay', color: 'bg-yellow-500' }
-];
+// Removed category filter section per user request
 
 export function ComponentSelector() {
-  const { searchQuery, selectedCategory, selectedComponent, setSearchQuery, setSelectedCategory, setSelectedComponent } = useComponentStore();
+  const { searchQuery, selectedComponent, setSearchQuery, setSelectedComponent } = useComponentStore();
   const [components, setComponents] = useState<ShadcnComponent[]>([]);
   const [filteredComponents, setFilteredComponents] = useState<ShadcnComponent[]>([]);
 
@@ -49,13 +39,10 @@ export function ComponentSelector() {
       );
     }
 
-    // Filter by category
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(comp => comp.category === selectedCategory);
-    }
+    // Category filtering removed
 
     setFilteredComponents(filtered);
-  }, [components, debouncedSearchQuery, selectedCategory]);
+  }, [components, debouncedSearchQuery]);
 
   const loadComponents = async () => {
     try {
@@ -77,17 +64,24 @@ export function ComponentSelector() {
     setSearchQuery(value);
   };
 
-  const handleCategoryChange = (categoryId: string) => {
-    setSelectedCategory(categoryId);
-  };
+  // Category filter removed
 
   const handleComponentSelect = (component: ShadcnComponent) => {
     setSelectedComponent(component);
   };
 
   const getCategoryColor = (category: string) => {
-    const cat = CATEGORIES.find(c => c.id === category);
-    return cat?.color || 'bg-gray-500';
+    // Keep badge color mapping simple without filter buttons
+    switch (category) {
+      case 'ui': return 'bg-green-500';
+      case 'form': return 'bg-purple-500';
+      case 'layout': return 'bg-orange-500';
+      case 'feedback': return 'bg-red-500';
+      case 'navigation': return 'bg-indigo-500';
+      case 'data-display': return 'bg-pink-500';
+      case 'overlay': return 'bg-yellow-500';
+      default: return 'bg-gray-500';
+    }
   };
 
   if (isLoading) {
@@ -112,21 +106,7 @@ export function ComponentSelector() {
         />
       </div>
 
-      {/* Category Filter */}
-      <div className="flex flex-wrap gap-2">
-        {CATEGORIES.map((category) => (
-          <Button
-            key={category.id}
-            variant={selectedCategory === category.id ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => handleCategoryChange(category.id)}
-            className="text-xs"
-          >
-            <div className={`w-2 h-2 rounded-full ${category.color} mr-2`} />
-            {category.name}
-          </Button>
-        ))}
-      </div>
+      {/* Category Filter removed */}
 
       {/* Components Grid */}
       <ScrollArea className="h-[600px]">
@@ -139,7 +119,7 @@ export function ComponentSelector() {
             <div className="flex flex-col items-center justify-center h-64 text-muted-foreground">
               <AlertCircle className="h-12 w-12 mb-4 opacity-50" />
               <p className="text-center">
-                {searchQuery || selectedCategory !== 'all' 
+                {searchQuery 
                   ? 'No components found matching your criteria'
                   : 'No components available'
                 }

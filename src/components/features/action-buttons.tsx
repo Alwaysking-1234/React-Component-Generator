@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 export function ActionButtons() {
-  const { selectedComponent, customProps } = useComponentStore();
+  const { selectedComponent, customProps, stylePresetClassName } = useComponentStore();
   const [copied, setCopied] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
 
@@ -17,8 +17,13 @@ export function ActionButtons() {
     return null;
   }
 
+  const combinedProps = {
+    ...customProps,
+    className: `${stylePresetClassName ?? ''} ${typeof customProps.className === 'string' ? customProps.className : ''}`.trim()
+  };
+
   const handleCopyCode = async () => {
-    const code = generateFullCode(selectedComponent, customProps);
+    const code = generateFullCode(selectedComponent, combinedProps);
     const success = await copyToClipboard(code);
     if (success) {
       setCopied(true);
@@ -30,14 +35,14 @@ export function ActionButtons() {
   };
 
   const handleDownloadComponent = () => {
-    downloadComponent(selectedComponent, customProps);
+    downloadComponent(selectedComponent, combinedProps);
     setDownloaded(true);
     setTimeout(() => setDownloaded(false), 2000);
     toast.success(`${selectedComponent.displayName} component downloaded!`);
   };
 
   const handleCopyJSX = async () => {
-    const code = generateFullCode(selectedComponent, customProps);
+    const code = generateFullCode(selectedComponent, combinedProps);
     const jsxOnly = code.split('\n').slice(1, -1).join('\n'); // Remove import and export lines
     const success = await copyToClipboard(jsxOnly);
     if (success) {

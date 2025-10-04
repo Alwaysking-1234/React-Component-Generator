@@ -1,0 +1,12 @@
+{
+  // Suppress unknown at-rule warnings from VS Code's CSS language server
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore",
+
+  // Treat CSS files in this project as PostCSS for better compatibility with Tailwind v4 directives
+  "files.associations": {
+    "**/src/app/**/*.css": "postcss",
+    "**/globals.css": "postcss"
+  }
+}

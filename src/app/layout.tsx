@@ -26,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        suppressHydrationWarning={true}
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        {/* Global toaster with default settings so keyboard shortcut toasts render without being affected by per-component customizer */}
         <Toaster />
       </body>
     </html>

@@ -4,6 +4,19 @@ export const generateComponentCode = (
   component: ShadcnComponent,
   props: Record<string, string | number | boolean | string[]>
 ): string => {
+  // Special handling for Sonner (toast) since usage differs from typical component mounting
+  if (component.name === 'sonner') {
+    const duration = typeof props.duration === 'number' ? props.duration : Number(props.duration ?? 4000);
+    const position = (props.position as import('sonner').ToasterProps['position']) ?? 'bottom-right';
+    const richColors = Boolean(props.richColors);
+    return `<>
+  <Toaster position="${position}" richColors={${richColors}} />
+  <Button onClick={() => toast.success('Hello World!', { duration: ${duration} })}>
+    Show Toast
+  </Button>
+</>`;
+  }
+
   const componentName = component.displayName;
   
   // Filter out props with default values and format the remaining ones
@@ -66,6 +79,15 @@ export default function Example() {
 };
 
 export const generateImportStatements = (component: ShadcnComponent): string => {
+  // Sonner requires a special import footprint
+  if (component.name === 'sonner') {
+    const imports = [
+      `import { Toaster } from '${component.importPath}';`,
+      `import { Button } from '@/components/ui/button';`,
+      `import { toast } from 'sonner';`
+    ];
+    return imports.join('\n');
+  }
   const imports = [`import { ${component.displayName} } from '${component.importPath}';`];
   
   // Add imports for child components based on component type

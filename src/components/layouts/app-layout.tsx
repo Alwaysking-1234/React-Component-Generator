@@ -3,6 +3,7 @@
 import { ComponentSelector } from '@/components/features/component-selector';
 import { ComponentPreview } from '@/components/features/component-preview';
 import { PropertyCustomizer } from '@/components/features/property-customizer';
+import { StyleControls } from '@/components/features/style-controls';
 import { ActionButtons } from '@/components/features/action-buttons';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -67,7 +68,10 @@ export function AppLayout() {
               </TabsList>
               
               <TabsContent value="customize" className="h-full p-4 overflow-y-auto">
-                <PropertyCustomizer />
+                <div className="space-y-4">
+                  <StyleControls />
+                  <PropertyCustomizer />
+                </div>
               </TabsContent>
               
               <TabsContent value="export" className="h-full p-4 overflow-y-auto">

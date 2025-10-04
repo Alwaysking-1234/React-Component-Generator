@@ -4,6 +4,8 @@ import { ShadcnComponent } from '@/types/component';
 interface ComponentStore {
   selectedComponent: ShadcnComponent | null;
   customProps: Record<string, string | number | boolean | string[]>;
+  // Preset styles composed via StyleControls component
+  stylePresetClassName: string;
   searchQuery: string;
   selectedCategory: string;
   
@@ -11,6 +13,8 @@ interface ComponentStore {
   setSelectedComponent: (component: ShadcnComponent | null) => void;
   setCustomProps: (props: Record<string, string | number | boolean | string[]>) => void;
   updateCustomProp: (key: string, value: string | number | boolean | string[]) => void;
+  setStylePresetClassName: (className: string) => void;
+  resetStylePreset: () => void;
   setSearchQuery: (query: string) => void;
   setSelectedCategory: (category: string) => void;
   resetCustomProps: () => void;
@@ -19,6 +23,7 @@ interface ComponentStore {
 export const useComponentStore = create<ComponentStore>((set, get) => ({
   selectedComponent: null,
   customProps: {},
+  stylePresetClassName: '',
   searchQuery: '',
   selectedCategory: 'all',
   
@@ -33,8 +38,11 @@ export const useComponentStore = create<ComponentStore>((set, get) => ({
         return acc;
       }, {} as Record<string, string | number | boolean | string[]>);
       set({ customProps: defaultProps });
+      // Also reset any composed style preset to avoid visual bleed across components
+      set({ stylePresetClassName: '' });
     } else {
       set({ customProps: {} });
+      set({ stylePresetClassName: '' });
     }
   },
   
@@ -48,6 +56,10 @@ export const useComponentStore = create<ComponentStore>((set, get) => ({
       }
     }));
   },
+  
+  setStylePresetClassName: (className) => set({ stylePresetClassName: className }),
+  
+  resetStylePreset: () => set({ stylePresetClassName: '' }),
   
   setSearchQuery: (query) => set({ searchQuery: query }),
   
