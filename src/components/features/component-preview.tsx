@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge as BadgeComponent } from '@/components/ui/badge';
@@ -434,9 +433,7 @@ export function ComponentPreview() {
               <CardTitle className="text-xl">{selectedComponent.displayName}</CardTitle>
               <CardDescription>{selectedComponent.description}</CardDescription>
             </div>
-            <Badge variant="secondary" className="capitalize">
-              {selectedComponent.category}
-            </Badge>
+            {/* Category badge removed */}
           </div>
         </CardHeader>
       </Card>

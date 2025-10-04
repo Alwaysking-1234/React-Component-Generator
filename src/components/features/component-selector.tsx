@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Search, Package, AlertCircle } from 'lucide-react';
 import { useComponentStore } from '@/stores/component-store';
@@ -70,19 +69,7 @@ export function ComponentSelector() {
     setSelectedComponent(component);
   };
 
-  const getCategoryColor = (category: string) => {
-    // Keep badge color mapping simple without filter buttons
-    switch (category) {
-      case 'ui': return 'bg-green-500';
-      case 'form': return 'bg-purple-500';
-      case 'layout': return 'bg-orange-500';
-      case 'feedback': return 'bg-red-500';
-      case 'navigation': return 'bg-indigo-500';
-      case 'data-display': return 'bg-pink-500';
-      case 'overlay': return 'bg-yellow-500';
-      default: return 'bg-gray-500';
-    }
-  };
+  // Category tag display removed per request
 
   if (isLoading) {
     return (
@@ -139,9 +126,7 @@ export function ComponentSelector() {
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg">{component.displayName}</CardTitle>
-                    <Badge variant="secondary" className={`${getCategoryColor(component.category)} text-white`}>
-                      {component.category}
-                    </Badge>
+                    {/* Category badge removed */}
                   </div>
                   <CardDescription className="text-sm">
                     {component.description}

@@ -1,79 +1,186 @@
-# Shadcn Component Customizer
+# ⚙️ React Component Generator
 
-A powerful web application that lets you select Shadcn UI components, customize their properties in real-time, and export generated code with a live preview. It includes an accessible, system-aware dark mode, robust style controls, toast customization, and code generation.
+> Interactive Shadcn UI component customizer with real-time preview and copy-ready code generation.
 
-## Overview
-This repository contains the implementation of Shadcn Component Customizer, designed to customize and generate Shadcn-style UI components with a live preview.
+Repository: https://github.com/Mahdirnj/React-Component-Generator
 
-## Key Features
-- Live component preview with generated code output
-- System-aware dark mode with manual override and smooth transitions
-- Theme toggle (system, light, dark) with persistent storage
-- Style controls with reset and advanced options
-- Toast customization preview (Sonner) with per-instance attributes
-- Responsive and accessible UI with OKLCH-based palettes
+Live Demo (GitHub Pages, if enabled): https://mahdirnj.github.io/React-Component-Generator/
 
-## Technology Stack
-### Core Libraries
-- Next.js (App Router, Turbopack): 15.5.4
-- React: 19.1.0
+Transform your UI development workflow with live component customization, intelligent theming, and instant code export. Built with Next.js 15, React 19, and modern web technologies.
 
-### Supporting Libraries
-- Tailwind CSS v4 + custom global CSS tokens/utilities
-- Radix UI primitives: Accordion, Select, Dialog, Tabs, etc.
-- Zustand: 5.0.8
-- next-themes: 0.4.6
-- Sonner: 2.0.7
-- react-syntax-highlighter
+![Main Interface](./asset/mainpage.png)
 
-## Implementation Details
-- Dark mode
-  - ThemeProvider configured with attribute="class", defaultTheme="system", enableSystem in src/app/providers.tsx
-  - Smooth theme transitions and reduced-motion fallback in src/app/globals.css
-  - Hydration-safe ThemeToggle in src/components/ui/theme-toggle.tsx (mounted flag prevents SSR/CSR text mismatch)
-- Style controls
-  - Centralized stylePresetClassName in Zustand store (src/stores/component-store.ts)
-  - Reset of visual state when switching components to prevent style bleed (StyleControls + store)
-  - Basic tools prominently displayed; advanced options grouped in an Accordion (src/components/features/style-controls.tsx)
-- Toasts
-  - Wrapper Toaster binds to current theme via useTheme (src/components/ui/sonner.tsx)
-  - Preview Toaster accepts position, richColors, and duration so changes reflect live (src/components/features/component-preview.tsx)
-- Code generation
-  - Preview via react-syntax-highlighter
-  - Code generation helpers in src/lib/code-generator.ts
+## ✨ Features
 
-## Installation
-1. Clone the repository:
-   git clone <your-repository-url>
-   cd comp-gen
+### 🔥 Live Component Preview
+- Real-time property controls with instant visual feedback
+- Copy-ready code generation with syntax highlighting
+- Responsive preview across screen sizes
 
-2. Install dependencies:
-   npm install
+![Component Export](./asset/export.png)
 
-## Usage
-Start the dev server:
-   npm run dev
+### 🌙 Intelligent Dark Mode
+- System-aware theming with automatic detection
+- Manual override controls (Light/Dark/System)
+- Smooth transitions with reduced-motion support
+- Hydration-safe implementation to avoid SSR/CSR mismatches
 
-- Optional port:
-   npm run dev -- --port 3003
+### 🎛️ Advanced Style Controls
+- Preset style combinations for rapid prototyping
+- Granular property customization with live preview
+- Reset functionality to prevent style bleeding
+- Collapsible advanced options for clean UX
 
-## Configuration
-Modify these files to customize behavior:
-- next.config.ts: build/dev options
-- src/app/providers.tsx: ThemeProvider settings (attribute, defaultTheme, enableSystem)
-- src/app/globals.css: color tokens and theme transitions
-- components.json: registry of available UI components and their props
+### 🍞 Toast Customization
+- Live toast preview using Sonner
+- Position, duration, and style controls
+- Rich colors and theme-aware styling
+- Per-instance attribute configuration
 
-## Contribution Guidelines
+![Enhanced Interface](./asset/mainpage2.png)
+
+## 🚀 Technology Stack
+
+### Core Framework
+- Next.js 15.5.4 (App Router, Turbopack, Server Components)
+- React 19.1.0
+- TypeScript
+
+### UI & Styling
+- Tailwind CSS v4 with custom tokens
+- Radix UI primitives
+- shadcn/ui component library
+
+### State & Theming
+- Zustand 5.0.8 (state management)
+- next-themes 0.4.6 (dark mode)
+- Sonner 2.0.7 (toasts)
+
+### Developer Experience
+- react-syntax-highlighter (code preview)
+- ESLint
+- Turbopack hot reload
+
+## 🛠️ Installation
+
+Prerequisites: Node.js 18+, npm/yarn/pnpm
+
+```bash
+# Clone the repository
+git clone https://github.com/Mahdirnj/React-Component-Generator.git
+cd React-Component-Generator
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Optional: Custom port
+npm run dev -- --port 3003
+```
+
+Visit http://localhost:3000 (or your custom port) to see the application.
+
+## 📖 Usage Guide
+
+### Basic Workflow
+1. Select a component from the sidebar
+2. Customize properties using the style controls
+3. Preview changes in real-time
+4. Copy generated code for your project
+
+### Advanced Features
+- Theme switching via header toggle
+- Style presets for quick iteration
+- Toast configuration and preview
+- Responsive preview across screen sizes
+
+## ⚙️ Configuration
+
+Key files:
+- next.config.ts — build/dev options (configured for static export)
+- src/app/providers.tsx — ThemeProvider settings
+- src/app/globals.css — global styles and transitions
+- components.json — registry of UI components and props
+
+Environment variable (optional for GitHub Pages Project Pages):
+```env
+NEXT_PUBLIC_BASE_PATH=/React-Component-Generator
+```
+
+## 🏗️ Architecture
+
+Project structure:
+```
+src/
+├── app/                 # Next.js App Router
+│   ├── layout.tsx      # Root layout with providers
+│   ├── page.tsx        # Main application page
+│   └── providers.tsx   # Theme and state providers
+├── components/
+│   ├── features/       # Feature-specific components
+│   ├── layouts/        # Layout components
+│   └── ui/             # shadcn/ui components
+├── hooks/              # Custom React hooks
+├── lib/                # Utilities and helpers
+├── stores/             # Zustand state stores
+└── types/              # TypeScript type definitions
+```
+
+Key implementation details:
+- Hydration-safe theming (suppressHydrationWarning and mounted gating)
+- Centralized state management via Zustand
+- Accessible UI using Radix primitives
+- Performance-aware design with code splitting
+
+## 🚀 Deployment
+
+### GitHub Pages (Static Export)
+The repository includes a workflow at `.github/workflows/nextjs.yml` to build and deploy.
+
+```bash
+# Build for static export
+npm run build
+```
+
+If using Project Pages, ensure `NEXT_PUBLIC_BASE_PATH=/React-Component-Generator` and `basePath`/`assetPrefix` are configured in `next.config.ts`.
+
+Live URL pattern: https://mahdirnj.github.io/React-Component-Generator/
+
+### Vercel (Recommended)
+1. Push your repository to GitHub
+2. Import at https://vercel.com/new
+3. Vercel automatically builds and deploys
+
+### Other Platforms
+- Netlify: deploy the `out/` folder
+- AWS S3: upload static files after `npm run build`
+
+## 🤝 Contributing
+
 1. Fork the repository
-2. Create your feature branch
-3. Submit a pull request
+2. Create a feature branch
+3. Commit changes and open a pull request
 
-## License
-MIT License (see LICENSE.txt)
+Development guidelines:
+- Follow code style and conventions
+- Add tests for new features where applicable
+- Update documentation when necessary
+- Ensure accessibility and performance are considered
 
-## Alternative: Deploy to Vercel
-Vercel offers zero-config Next.js deployments (SSR supported):
-- Push your repo to GitHub
-- Import the project at vercel.com/new
-- Vercel will build and deploy automatically
+## 📄 License
+
+MIT License — see [LICENSE.txt](LICENSE.txt).
+
+## 🙏 Acknowledgments
+
+- shadcn/ui for the component library
+- Vercel for Next.js and hosting
+- Radix UI for accessible primitives
+
+---
+
+**Star the repo:** https://github.com/Mahdirnj/React-Component-Generator
+
+**Report issues / request features:** https://github.com/Mahdirnj/React-Component-Generator/issues
